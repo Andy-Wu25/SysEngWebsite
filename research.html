@@ -6,7 +6,7 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UI design</title>
+    <title>Research</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -69,10 +69,16 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="requirements.html">Requirements</a></li>
-                        <li class="current"><a href="research.hmtl">Research</a></li>
+                        <li class="current"><a href="research.html">Research</a></li>
                         <li><a href="ui_design.html">UI Design</a></li>
+                        <li><a href="system_design.html">System Design</a></li>
+                        <li><a href="software.html">Software</a></li>
+                        <li><a href="testing.html">Testing</a></li>
+                        <li><a href="evaluation.html">Evaluation</a></li>
+                        <li><a href="appendices.html">Appendices</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
+
                     </ul> <!-- s-header__menu-links -->
 
                     <div class="s-header__contact">
@@ -93,8 +99,8 @@
                  <div class="row">
                      <div class="column xl-12">
                          <h1 class="page-title">
-                             <span class="page-title__small-type text-pretitle">The UI/UX</span>
-                             Design
+                             <span class="page-title__small-type text-pretitle"></span>
+                             Research
                          </h1>
                          
                      </div>
@@ -118,68 +124,113 @@
                 <div class="row width-narrower pagemain">
                     <div class="column xl-12"> 
 
-                        <h2>Design Strategy</h2>
+                        <h2>Existing Solutions</h2>
                         <p>
-                            A satisfactory user experience is the utmost priority for 
-                            our product. After the diagnosis of MND, patients’ control 
-                            of muscle movements will continue to deteriorate. Hence, 
-                            it is essential for our software to be easy to use with minimal
-                            effort in order for it to tackle one of our key goals.
+                            Our project's main aim is to infuse spoken audio generated from text with emotion on a reasonable time scale.
+                            This involves building on existing TTS models, as training such a model from scratch would require immense amounts
+                            of data and computing resources. There are various methods available to achieve this task, and some of them are 
+                            described below.
                         </p>
 
-                        <h2 class="u-add-bottom">Design Principles</h2>
+                        <h2 class="u-add-bottom">Possible Methodologies</h2>
 
                         <div class="grid-list-items list-items">
                             <div class="grid-list-items__item list-items__item u-remove-bottom">
                                 <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Simplicity</u></h6>
+                                    <h6 class="list-items__item-small-title"><u>Fine-tuning</u></h6>
                                 </div>
                                 <p>
-                                For a simple design, we have decided to only implement one main page, where everything is displayed. This allows simpler navigation between different processes.
+                                Fine-tuning is a process that makes use of a pre-trained model's more general capabilities 
+                                and tunes its responses in a specific context that matches our needs. This method is useful
+                                as it requires less computational power, training data as well as time required for training. 
+                                This makes the method a viable option for our project on the given time scale. 
                                 </p>
                             </div>
                             <div class="grid-list-items__item list-items__item u-remove-bottom">
                                 <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Consistency</u></h6>
+                                    <h6 class="list-items__item-small-title"><u>Audio Presets</u></h6>
                                 </div>
                                 <p> 
-                                To keep your desing consistent, we will ensure that:
+                                Existing open source TTS models often allow the use of voice presets that can make changes to 
+                                voice, pitch and prosody levels in the default model output. These metrics are key to affecting
+                                emotion in speech, and thus can be leveraged by configuring voice presets for each emotion during
+                                development. 
                                 </p>
-                                <ul>
-                                    <li>All buttons are the same size and style.</li>
-                                    <li>All text are the same size, colour and font.</li>
-                                    <li>The system is split into equal sized columns and padding for different functionalities.</li>
-                                </ul>
+                                
                             </div>
                             <div class="grid-list-items__item list-items__item u-remove-bottom">
                                 <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Visibility and Clarity</u></h6>
-                                </div>
-                                <p>To ensure that the system is has clear visibility and clarity, we will ensure that:</p>
-                                <ol>
-                                    <li>Different sections on the same page have contrasting colours/backgrounds to easily distinguish between different processes.</li>
-                                    <li>Buttons are large with clear labels.</li>
-                                    <li>Emotions are labelled with different emojis for visual aid.</li>
-                                </ol>
-                            </div>
-                            <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Feedback</u></h6>
+                                    <h6 class="list-items__item-small-title"><u>Re-training</u></h6>
                                 </div>
                                 <p>
-                                ...
+                                    Re-training existing TTS models with modifications to the model architecture allows the 
+                                    incorporation of pitch and prosodic changes that weren't originally possible. For our project,
+                                    this would mean introducing speaker embeddings and emotion IDs to a corpus of audio data transcribed
+                                    and labelled with the corresponding emotion. However, this method requires access to significantly
+                                    powerful hardware and unrealistic time scales in this context. 
+                                </p>
+                                
+                            </div>
+                            <div class="grid-list-items__item list-items__item u-remove-bottom">
+                                <div class="list-items__item-header">
+                                    <h6 class="list-items__item-small-title"><u>Prompt Conditioning</u></h6>
+                                </div>
+                                <p>
+                                    Prompt conditioning involves making use of prompts visible to the model during text processing and 
+                                    audio generation that allow dynamic control over natural speech patterns, like pauses. Depending on the 
+                                    specific model capabilities due to the data available to train it on, this can range from introducing
+                                    convincing human laughter to potentially attuning the audio to a specific emotion with curated prompts.
                                 </p>
                             </div>
+                            
                         </div> <!--grid-list-items -->
 
-                        <h2>Hand-drawn sketches</h2>
+                        <h2>Existing Project: Emotivoice</h2>
                         <p>
-                        ...
+                            The TTS model EmotiVoice is a project that offers the capabilities required for our main goals. As a prompt-controlled 
+                            TTS engine, it allows a degree of flexibility in the audio produced by the model, such as emphasis of tone or subtle pauses.
+                            <br><br>
+                            Crucially, it takes one of six emotions (Calm, Happy, Angry, Fearful, Surprised, Disgusted) along with the phonemes that
+                            correspond to the text input in order to render the audio as required. The model architecture is based on the PromptTTS research 
+                            paper by Microsoft, which describes the ability to make use of embedded prompts in the input text to influence prosody in a more 
+                            dynamic way.
+                            <br><br>
+                            For our project, not only can we make use of the EmotiVoice TTS engine, we can also take inspiration from its basis rooted in 
+                            prompt-controlled audio generation in order to produce convincing emotional audio.
                         </p>                  
 
-                        <h2>Prototyping with Proto.io</h2>
+                        <h2>Comparison of Solutions</h2>
                         <p>
-                        ...
+                            Each methodology described above comes with its own pros and cons. 
+                            <br><br>
+                            Re-training: This method allows the most control over the structure of the model and the output produced. However, not only does
+                            it require a large amount of data in order to achieve a usable standard, it also takes much more time than the other methods described. 
+                            Due to the nature of our project's timeline, this method is less feasible than others.
+                            <br><br>
+                            Fine-tuning: While this method significantly decreases the time required to obtain a model that achieves one's desired goal,
+                            the amount of highly specific data required to implement this method effectively remains a barrier.
+                            <br><br>
+                            Prompt-conditioning: While flexible, one potential drawback is that prompt processing generally takes up more compute power, as 
+                            well as an increased amount of time between input and output. 
+                            <br><br>
+                            Audio presets: This method, although restrictive in the range of emotion available to synthesise, allows custom audio generation 
+                            with a lower time period required to process text and generate input.
+                            
+                        </p>
+
+                        <h2>Technology Review</h2>
+                        <p>
+                            ...
+                        </p>
+
+                        <h2>Summary</h2>
+                        <p>
+                            ...
+                        </p>
+
+                        <h2>References</h2>
+                        <p>
+                            ...
                         </p>
 
                     </div> <!-- end grid-block-->
