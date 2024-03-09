@@ -6,7 +6,7 @@
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UI design</title>
+    <title>Research</title>
 
     <script>
         document.documentElement.classList.remove('no-js');
@@ -69,8 +69,13 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="requirements.html">Requirements</a></li>
-                        <li class="current"><a href="research.hmtl">Research</a></li>
+                        <li class="current"><a href="research.html">Research</a></li>
                         <li><a href="ui_design.html">UI Design</a></li>
+                        <li><a href="system_design.html">System Design</a></li>
+                        <li><a href="implementation.html">Implementation</a></li>
+                        <li><a href="testing.html">Testing</a></li>
+                        <li><a href="evaluation.html">Evaluation</a></li>
+                        <li><a href="appendices.html">Appendices</a></li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul> <!-- s-header__menu-links -->
@@ -93,94 +98,74 @@
                  <div class="row">
                      <div class="column xl-12">
                          <h1 class="page-title">
-                             <span class="page-title__small-type text-pretitle">The UI/UX</span>
-                             Design
+                             <span class="page-title__small-type text-pretitle">Research Process</span>
+                             Research
                          </h1>
                          
                      </div>
                  </div>
             </section> <!-- end pageheader --> 
 
-            
-            <section class="s-pagecontent pagecontent">  
-                
-                <!--<div class="row pagemedia">
-                    <d class="column xl-12">
-                        <figure class="page-media">                                
-                            <img src="images/thumbs/about/about-1200.jpg" 
-                                 srcset="images/thumbs/about/about-2400.jpg 2400w, 
-                                         images/thumbs/about/about-1200.jpg 1200w, 
-                                         images/thumbs/about/about-600.jpg 600w" sizes="(max-width: 2400px) 100vw, 2400px" alt="">
-                        </figure>
-                    </d>
-                </div> <!-- end pagemedia --> 
-
+            <p> </p>
                 <div class="row width-narrower pagemain">
                     <div class="column xl-12"> 
 
-                        <h2>Design Strategy</h2>
-                        <p>
-                            A satisfactory user experience is the utmost priority for 
-                            our product. After the diagnosis of MND, patients’ control 
-                            of muscle movements will continue to deteriorate. Hence, 
-                            it is essential for our software to be easy to use with minimal
-                            effort in order for it to tackle one of our key goals.
-                        </p>
+                        <h2>Related Project Review</h2>
+                        <div>
+                            <p>The main component of this project is the output of emotional audio. 
+                            This is very similar to products such as WavelAI and TypecastAI since both products are designed to generate emotional audio from text input. 
+                            As both the products are business solutions with a monthly service fee, the emotional audio output service are all private. Hence, the main difference between these products and our project is that our project is implemented with only open-sourced models and libraries.
+                            This difference is significant as it allows us to achieve one of the main goals of our project, which is to provide this service to MND patients without any financial barriers.
+                            </p>
+                        </div>
+                        <div>
+                            <p>Additionally, our UI is simpler and does not need the user to type text input, since keyboard inputs could be difficult for MND patients. Instead, we use the text generated from the other group as our input.</p>
+                        </div>
 
-                        <h2 class="u-add-bottom">Design Principles</h2>
 
-                        <div class="grid-list-items list-items">
-                            <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Simplicity</u></h6>
-                                </div>
-                                <p>
-                                For a simple design, we have decided to only implement one main page, where everything is displayed. This allows simpler navigation between different processes.
-                                </p>
-                            </div>
-                            <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Consistency</u></h6>
-                                </div>
-                                <p> 
-                                To keep your desing consistent, we will ensure that:
-                                </p>
+                        <h2>Technology Review</h2> 
+                        <h4>Programming Language</h4>
+                            <p>Python</p>
+                        <h4>Sentiment Analysis</h4>
+                            <p>There are many open-sourced sentiment analysis models available on Hugging Face</p>
+                        <h4>GUI and frontend</h4>
+                            <p>Streamlit</p>
+                        <h4>Backend</h4>
+                            <p>VALL-E(X)</p>
+                        <h4>Language Models</h4>
+                            <p>
                                 <ul>
-                                    <li>All buttons are the same size and style.</li>
-                                    <li>All text are the same size, colour and font.</li>
-                                    <li>The system is split into equal sized columns and padding for different functionalities.</li>
-                                </ul>
-                            </div>
-                            <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Visibility and Clarity</u></h6>
-                                </div>
-                                <p>To ensure that the system is has clear visibility and clarity, we will ensure that:</p>
-                                <ol>
-                                    <li>Different sections on the same page have contrasting colours/backgrounds to easily distinguish between different processes.</li>
-                                    <li>Buttons are large with clear labels.</li>
-                                    <li>Emotions are labelled with different emojis for visual aid.</li>
-                                </ol>
-                            </div>
-                            <div class="grid-list-items__item list-items__item u-remove-bottom">
-                                <div class="list-items__item-header">
-                                    <h6 class="list-items__item-small-title"><u>Feedback</u></h6>
-                                </div>
-                                <p>
-                                ...
-                                </p>
-                            </div>
-                        </div> <!--grid-list-items -->
+                                    <li>VADER</li>
+                                    <li>BERT</li>
+                                </ul></p>             
+                        
+                        <h2>Comparison between different libraries</h2>
+                        <h2>Summary of Our Technical Decisions</h2>
+                        <table>
+                            <tr>
+                              <th>Technical Problem</th>
+                              <th>Our Decision</th>
+                            </tr>
+                            <tr>
+                              <td>Programming Language (front and back end)</td>
+                              <td>Python 3</td>
+                            </tr>
+                            <tr>
+                              <td>Sentiment Analysis</td>
+                              <td>BERT and VADER models</td>
+                            </tr>
+                            <!-- ... Add the other rows similarly -->
+                            <tr>
+                              <td>GUI</td>
+                              <td>Streamlit</td>
+                            </tr>
+                            <tr>
+                              <td>APIs</td>
+                              <td></td>
+                            </tr>
+                          </table>
 
-                        <h2>Hand-drawn sketches</h2>
-                        <p>
-                        ...
-                        </p>                  
-
-                        <h2>Prototyping with Proto.io</h2>
-                        <p>
-                        ...
-                        </p>
+                        <h2>References</h2>
 
                     </div> <!-- end grid-block-->
                 </div> <!-- end pagemain -->
