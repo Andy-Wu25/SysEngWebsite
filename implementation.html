@@ -98,8 +98,8 @@
                  <div class="row">
                      <div class="column xl-12">
                          <h1 class="page-title">
-                             <span class="page-title__small-type text-pretitle">The UI/UX</span>
-                             Design
+                             <span class="page-title__small-type text-pretitle">The Key Features</span>
+                             Implementation
                          </h1>
                          
                      </div>
@@ -119,102 +119,119 @@
                         </figure>
                     </d>
                 </div> <!-- end pagemedia --> 
-
+                
                 <div class="row width-narrower pagemain">
                     <div class="column xl-12"> 
-
+                        <p>These are the key features that allow us to achieve all of our project goals. All the key features are explained and documented throughly below.</p>
                         <h2>User Input</h2>
-                        <p>
+                        <img src="images/1.png" alt="User Input" style="width:100%;height:auto;">
+                        <p>There are fiev different parts of the user interface: text box, smart generate button, select emotion box, manual generate button and user interface being disabled during audio generation. We have separated the different parts of the application into different column. 
                         </p>
 
-                       
+                        <h5>Text box</h5>
+                        <p>The text box allows the user to input a piece of text using a keyboard. The inputted text will then be used to generate emotional audio.</p>
+                            <img src="images/2.png" alt="User Input" style="width:100%;height:auto;">
+                        
+                        <h5>Smart Generate</h5>
+                        <p>This button function contains two different processes. The first process is the sentiment analysis of the text input. This will involve calling different pretrained sentiment analysis models, combining their different scores and returning a concluded emotion. The second process will then utilise the stored text and concluded emotion to generate emotional audio.</p>
+                        <img src="images/3.png" alt="User Input" style="width:100%;height:auto;">
+                        
+                        <h5>Select Emotion and Manual Generate</h5>
+                        <p>The select emotion box and manual generate button are combined into a single function for manual generation. The select box allows the user to choose the emotion of the emotional audio based on their text input. The text and selected emotion will then be stored and utilised to generate the emotional audio.</p>
 
+                        <p>To ensure that the audio generation process is not interrupted, we have disabled all the user interface elements until the process is complete. This is because in Streamlit, every button press will cause a page refresh, which could cause errors during audio generation.</p>
+                        <img src="images/4.png" alt="User Input" style="width:100%;height:auto;">
+                        
+                        <h5>Disable user interface during audio generation</h5>
+                        <p>For the functionality of disabling the buttons during audio generation, we have implemented different session states in Streamlit called <code>process_button_clicked</code>
+                            and <code>generation_in_progress</code>. When the session state of <code>generation_in_progress</code> is true, the text box, different buttons and select box will be disabled due to the way that they are constructed through <code>disabled = buttons_disabled</code>
+                            where <code>buttons_disabled = st.session_state["generation_in_progress"]</code>
+                           </p>
+                           <p>When there is user input in the text box and the smart generate button has been pressed, it will set <code>st.session_state["generation_in_progress"]</code> to True to disable all buttons and set <code>process_button_clicked</code> to True to start audio generation. After it has generated the audio, it will call <code>st.rerun()</code> to refresh the app and reset the session state flags to enable the user interface again.</p>
+                           <img src="images/5.png" alt="User Input" style="width:100%;height:auto;">
+                       
+                        <p>When a button is pressed, <code>process_button_clicked</code> session state will be set to True. If the <code>selected_emotion</code> session state is not empty, it will mean that the user is chosen to manual generate with the selected emotion and text, hence call <code>AudioGenerator.generate_audio_with_selected_emotion(st.session_state["selected_emotion"], text)</code>. If the <code>selected_emotion</code> session state is empty or non-existent, it will call the smart generation function instead with <code>AudioGenerator.analyse_and_generate_audio(text)</code></p>
+                        <img src="images/6.png" alt="User Input" style="width:100%;height:auto;">
                         <h2>Sentiment Analysis</h2>
                         <p>
-                        ...
-                        </p>                  
+                            We have imported and utilised pretrained sentiment analysis models to give us emotional indicators for text input. This function is used for the smart generation button since it needs to analyse the text and decide on a concluded emotion. We have initalised all the sentiment analysis models in <code>sentiment_analysis.py</code> to avoid reloading on each function call.
+                        </p>          
+                        <img src="images/13.png" alt="User Input" style="width:100%;height:auto;">
+                        <p>Through research, we have found that the same text can yield different results from different sentiment analysis models. As a result, we utilised multiple models and combined their scores together to reach an increasingly accurate result. This enables us to reliably analyse the emotion of the text input.</p>       
+                        
+                        <p>The <code>AnalysisManager</code> class has many different functions, including returning and formatting the scores of each model in sorted order. This allows us to view the emotion with the top score for each model, which will be utilised in concluding the final emotion. </p>
+                        <img src="images/14.png" alt="User Input" style="width:100%;height:auto;"> 
 
+                        <p>Most importantly, the <code>conclude_emotion</code> function combines all the different results together and returns the concluded result.</p>
+                        <p>Through research and testing for different emotional texts generated by ChatGPT, we have found that the DistilRoBERTa models are the most accurate, hence their result takes higher precedence.
+                        </p>
+                        <p>Furthermore, we found that the results from VADER is not very helpful in concluding the emotion. The result only returns positive, negative, netural and a compound score. Hence, these scores are redundant when comparing to other sentiment analysis models.</p>
+                        <img src="images/11.png" alt="User Input" style="width:100%;height:auto;">
                         <h2>Emotional Audio Generation</h2>
                         <p>
-                        ...
+                            In the <code>AudioGenerator</code> class, there are two functions <code>analyse_and_generate_audio</code>
+                            and <code>generate_audio_with_selected_emotion</code> which is used for smart and manual audio generation. Both functions will call <code>generator.py</code>. In <code>generator.py</code> it will read from <code>results.json</code>, and temporarily write a new json file containing the contents of <code>results.json</code> in the VALL directory.
+                            
                         </p>
+                        <img src="images/7.png" alt="User Input" style="width:100%;height:auto;">
+                        <p>It will then call another Python script called <code>voice_generator.py</code> which is located in the VALL directory</p>
+                        <p>In <code>voice_generator.py</code>, it will call <code>preload_models()</code> to load the necessary audio generation models. It will then open and read from <code>temporary_file.json</code> which was the temporary file that was created in <code>generator.py</code> to replicate the data in <code>results.json</code>. 
+                        </p>
+                        <p>As a result, it has access to the input text and the concluded/select emotion. This allows us to generate the emotional audio by passing in text and the <code>concluded_emotion</code> as arguments in the <code>generate_audio</code> function in VALL-E-X model. Then we will write the generatde wav file to <code>output_wav</code> using the id accessed in <code>temporary_file.json</code>, which was the unique id generated from the hash function.</p>
+                        <img src="images/8.png" alt="User Input" style="width:100%;height:auto;">
                         <h2>Audio Playback</h2>
+                        <p>In <code>play_audio.py</code>, we have included the function of audio playback. Streamlit has built-in audio playback function using <code>st.audio()</code>. To identify the correct audio file, it will read results.json and search for the audio file in <code>output_wav</code> based on the unique id stored in <code>results.json</code> to build the correct audio file path. If the audio file is found, it will call <code>st.audio()</code> to play the audio.
+                        </p>
+                        <img src="images/12.png" alt="User Input" style="width:100%;height:auto;">
                         <h2>Hash Function to check for existing audio files</h2>
+                        <p>This function utilises the input text and concluded/selected emotion combined as the input of hash function to generate an unique id. The unique id will then be used as the audio file name when generating the emotional audio. This is because if the user has the same repeated text of the same emotion, we can save computational resources by checking if the audio file has already been generated previously. If it has, it can reuse it again to be more computational efficient
+                        </p>
+                        <p>Since our system aims to help MND patients communicate efficiently, we should make conversational phrases be generated as quickly as possible. Even though the time of generation depends on the length of the text, we can include some pre-generated emotional audio that is extremely common in daily communications in the software package. Hence, when the user uses the phrases, hash function will generate an unique id that is identical to an already-downloaded audio file. This allows the user to communicate very efficiently without generating the phrases again.
+                        </p>
+                        <p><b>SHA-256</b> is specifically designed to minimise the likelihood of collisions by generating a unique hash value for each input with a high degree of probability. However, in practical terms, hash collisions can still occur due to factors such as the birthday paradox, where the probability of a collision increases as more hash values are generated.
+                        </p>
+                        <p>However, the likelihood of a hash collision occurring in a well-designed hash function like SHA-256 is extremely low, especially when considering the large number of possible hash values (2^256) compared to the total number of possible inputs. The birthday paradox suggests that in a set of n randomly chosen elements, there is a 50% chance of at least two elements having the same value when n is approximately the square root of the number of possible values. For SHA-256, with 2^256 possible hash values, the likelihood of a collision is very rare.
+                        </p>
+                        <img src="images/9.png" alt="User Input" style="width:100%;height:auto;">
+                        <p>These two functions are then used in the <code>AudioGenerator</code> class to check whether or not we need to generate a new audio file. For instance, with the manual generate function, we will create an unique id based on the input text and select emotion. The unique id will then be passed to <code>Utility.check_audio_file_exists</code> function and returns a Boolean to determine if the audio file with the same name already exists in <code>output_wav</code>. If it returns True, the same text and emotion has already been generated as emotional audio before, hence there is no need to generate the same audio again.
+                        </p>
+                        <img src="images/10.png" alt="User Input" style="width:100%;height:auto;">
+                        
 
                     </div> <!-- end grid-block-->
                 </div> <!-- end pagemain -->
 
            </section> <!-- pagecontent -->
 
-                <!-- # footer 
+        <!-- # footer 
         ================================================== -->
         <footer class="s-footer">
             <div class="row s-footer__content">
                 <div class="column xl-6 lg-6 md-12 s-footer__block s-footer__about">                    
-                    <h3>About Monica</h3>
+                    <h3>About EMENDi2</h3>
                     <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas illum quasi facere libero, 
-                    fugiat laboriosam possimus reprehenderit eveniet vero voluptatum fugit ad quis veritatis suscipit beatae 
-                    incidunt perferendis tempore earum hic repellendus quisquam recusandae ipsa id esse. Nobis, aut deleniti.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere ratione dignissimos.
+                    EMENDi2 aims to significantly improve the communication processfor MND patients by introducing an emotional voice synthesiser. 
                     </p>               
                 </div>                
                 <div class="column xl-3 lg-6 md-12 s-footer__block s-footer__site-links">
-                    <ul class="link-list">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="requirements.html">Requirements</a></li>
-                        <li><a href="ui_design.html">UI Design</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                    
                 </div>
-                <div class="column xl-3 lg-6 md-12 tab-12 s-footer__block s-footer__newsletter">
-                    <h3>Newsletter</h3>
-
-                    <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere ratione dignissimos.
-                    </p>
-
-                    <div class="subscribe-form">
-                        <form id="mc-form" class="mc-form">
-                            <input type="email" name="EMAIL" id="mce-EMAIL" class="u-fullwidth text-center" placeholder="Your Email Address" title="The domain portion of the email address is invalid (the portion after the @)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" required>
-                            <input type="submit" name="subscribe" value="Subscribe" class="btn btn--primary btn--small u-fullwidth">
-                            <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cdb7b577e41181934ed6a6a44_9a91cfe7b3" tabindex="-1" value=""></div> -->
-                            <div class="mc-status"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>     
+                
             
             <div class="row s-footer__bottom">
                 <div class="column xl-6 lg-12">
-                    <ul class="s-footer__social social-list">
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z"></path></svg>
-                                <span class="u-screen-reader-text">Facebook</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809 c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793 c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05 c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032 c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028 c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22 c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z"></path></svg>
-                                <span class="u-screen-reader-text">Twitter</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M11.999,7.377c-2.554,0-4.623,2.07-4.623,4.623c0,2.554,2.069,4.624,4.623,4.624c2.552,0,4.623-2.07,4.623-4.624 C16.622,9.447,14.551,7.377,11.999,7.377L11.999,7.377z M11.999,15.004c-1.659,0-3.004-1.345-3.004-3.003 c0-1.659,1.345-3.003,3.004-3.003s3.002,1.344,3.002,3.003C15.001,13.659,13.658,15.004,11.999,15.004L11.999,15.004z"></path><circle cx="16.806" cy="7.207" r="1.078"></circle><path d="M20.533,6.111c-0.469-1.209-1.424-2.165-2.633-2.632c-0.699-0.263-1.438-0.404-2.186-0.42 c-0.963-0.042-1.268-0.054-3.71-0.054s-2.755,0-3.71,0.054C7.548,3.074,6.809,3.215,6.11,3.479C4.9,3.946,3.945,4.902,3.477,6.111 c-0.263,0.7-0.404,1.438-0.419,2.186c-0.043,0.962-0.056,1.267-0.056,3.71c0,2.442,0,2.753,0.056,3.71 c0.015,0.748,0.156,1.486,0.419,2.187c0.469,1.208,1.424,2.164,2.634,2.632c0.696,0.272,1.435,0.426,2.185,0.45 c0.963,0.042,1.268,0.055,3.71,0.055s2.755,0,3.71-0.055c0.747-0.015,1.486-0.157,2.186-0.419c1.209-0.469,2.164-1.424,2.633-2.633 c0.263-0.7,0.404-1.438,0.419-2.186c0.043-0.962,0.056-1.267,0.056-3.71s0-2.753-0.056-3.71C20.941,7.57,20.801,6.819,20.533,6.111z M19.315,15.643c-0.007,0.576-0.111,1.147-0.311,1.688c-0.305,0.787-0.926,1.409-1.712,1.711c-0.535,0.199-1.099,0.303-1.67,0.311 c-0.95,0.044-1.218,0.055-3.654,0.055c-2.438,0-2.687,0-3.655-0.055c-0.569-0.007-1.135-0.112-1.669-0.311 c-0.789-0.301-1.414-0.923-1.719-1.711c-0.196-0.534-0.302-1.099-0.311-1.669c-0.043-0.95-0.053-1.218-0.053-3.654 c0-2.437,0-2.686,0.053-3.655c0.007-0.576,0.111-1.146,0.311-1.687c0.305-0.789,0.93-1.41,1.719-1.712 c0.534-0.198,1.1-0.303,1.669-0.311c0.951-0.043,1.218-0.055,3.655-0.055c2.437,0,2.687,0,3.654,0.055 c0.571,0.007,1.135,0.112,1.67,0.311c0.786,0.303,1.407,0.925,1.712,1.712c0.196,0.534,0.302,1.099,0.311,1.669 c0.043,0.951,0.054,1.218,0.054,3.655c0,2.436,0,2.698-0.043,3.654H19.315z"></path></svg>
-                                <span class="u-screen-reader-text">Instagram</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M20.66 6.98a9.932 9.932 0 0 0-3.641-3.64C15.486 2.447 13.813 2 12 2s-3.486.447-5.02 1.34c-1.533.893-2.747 2.107-3.64 3.64S2 10.187 2 12s.446 3.487 1.34 5.02a9.924 9.924 0 0 0 3.641 3.64C8.514 21.553 10.187 22 12 22s3.486-.447 5.02-1.34a9.932 9.932 0 0 0 3.641-3.64C21.554 15.487 22 13.813 22 12s-.446-3.487-1.34-5.02zM12 3.66c2 0 3.772.64 5.32 1.919-.92 1.174-2.286 2.14-4.1 2.9-1.002-1.813-2.088-3.327-3.261-4.54A7.715 7.715 0 0 1 12 3.66zM5.51 6.8a8.116 8.116 0 0 1 2.711-2.22c1.212 1.201 2.325 2.7 3.34 4.5-2 .6-4.114.9-6.341.9-.573 0-1.006-.013-1.3-.04A8.549 8.549 0 0 1 5.51 6.8zM3.66 12c0-.054.003-.12.01-.2.007-.08.01-.146.01-.2.254.014.641.02 1.161.02 2.666 0 5.146-.367 7.439-1.1.187.373.381.793.58 1.26-1.32.293-2.674 1.006-4.061 2.14S6.4 16.247 5.76 17.5c-1.4-1.587-2.1-3.42-2.1-5.5zM12 20.34c-1.894 0-3.594-.587-5.101-1.759.601-1.187 1.524-2.322 2.771-3.401 1.246-1.08 2.483-1.753 3.71-2.02a29.441 29.441 0 0 1 1.56 6.62 8.166 8.166 0 0 1-2.94.56zm7.08-3.96a8.351 8.351 0 0 1-2.58 2.621c-.24-2.08-.7-4.107-1.379-6.081.932-.066 1.765-.1 2.5-.1.799 0 1.686.034 2.659.1a8.098 8.098 0 0 1-1.2 3.46zm-1.24-5c-1.16 0-2.233.047-3.22.14a27.053 27.053 0 0 0-.68-1.62c2.066-.906 3.532-2.006 4.399-3.3 1.2 1.414 1.854 3.027 1.96 4.84-.812-.04-1.632-.06-2.459-.06z"></path></svg>
-                                <span class="u-screen-reader-text">Dribbble</span>
-                            </a>
-                        </li>
-                    </ul> <!-- end s-footer__social -->
+                    <ul class="link-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="requirements.html">Requirements</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="algorithms.html">Algorithms</a></li>
+                        <li><a href="ui_design.html">UI Design</a></li>
+                        <li><a href="system_design.html">System Design</a></li>
+                        <li><a href="implementation.html">Implementation</a></li>
+                        <li><a href="testing.html">Testing</a></li>
+                        <li><a href="evaluation.html">Evaluation</a></li>
+                        <li><a href="appendices.html">Appendices</a></li>
+                    </ul>
                 </div>
                 <div class="column xl-6 lg-12">
                     <p class="ss-copyright">
