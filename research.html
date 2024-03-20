@@ -66,18 +66,16 @@
                 <nav class="s-header__nav">
     
                     <ul class="s-header__menu-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
+                        <li class="current"><a href="index.html">Home</a></li>
                         <li><a href="requirements.html">Requirements</a></li>
-                        <li class="current"><a href="research.html">Research</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="algorithms.html">Algorithms</a></li>
                         <li><a href="ui_design.html">UI Design</a></li>
                         <li><a href="system_design.html">System Design</a></li>
                         <li><a href="implementation.html">Implementation</a></li>
                         <li><a href="testing.html">Testing</a></li>
                         <li><a href="evaluation.html">Evaluation</a></li>
                         <li><a href="appendices.html">Appendices</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                     </ul> <!-- s-header__menu-links -->
 
                     <div class="s-header__contact">
@@ -89,7 +87,6 @@
             </div> <!-- end s-header__inner -->
 
         </header> <!-- end s-header -->
-
         <!-- # site main content
         ================================================== -->
         <section id="content" class="s-content">
@@ -113,31 +110,192 @@
                         <h2>Related Project Review</h2>
                         <div>
                             <p>The main component of this project is the output of emotional audio. 
-                            This is very similar to products such as WavelAI and TypecastAI since both products are designed to generate emotional audio from text input. 
+                            This is very similar to existing applications such as <b>WavelAI</b> and <b>TypecastAI</b> since both are designed to generate emotional audio from text input. 
                             As both the products are business solutions with a monthly service fee, the emotional audio output service are all private. Hence, the main difference between these products and our project is that our project is implemented with only open-sourced models and libraries.
-                            This difference is significant as it allows us to achieve one of the main goals of our project, which is to provide this service to MND patients without any financial barriers.
+                            This significant difference allows us to achieve one of the main goals of our project, which is to provide this service to MND patients without any financial barriers.
                             </p>
                         </div>
+
                         <div>
-                            <p>Additionally, our UI is simpler and does not need the user to type text input, since keyboard inputs could be difficult for MND patients. Instead, we use the text generated from the other group as our input.</p>
+                            <p>
+                                <b>Tobii Dynavox</b> is a company specialising in asistive technology for communication such as communication apps, speech-generating devices and eye trackers for people with disabilities.
+                                It is similar to our project since it also has developed devices that can generate speech
+                            </p>
+                            <p>One of their applications is <b>TD Talk [1]</b>, which supports speech generation for literate adults with communication disabilities using eyes or fingers. The application offers a wide selection of languages and voices, predictive sentence construction, easy editing, and the Partner Window for showing typed text. 
+                                <a class="images"> <img src="images/tdtalk.webp" alt="Homepage"></a>
+                            </p>
+                            <p>Another one of their applications is <b>Communicator 5 [2]</b>, which allows for text-to-speech conversion using eyes, fingers, or a switch, with added functionalities for internet access and environmental control. 
+                            </p>
+                            
+                            
+                            <p>From existing applications, we can learn the importance:
+                                <ul>
+                                    <p><li><b>User Interface</b>: The UI must be tailored to the specific needs of the users, especially considering the physical limitations of individuals with conditions like MND. The ability to use eye-tracking for communication is particularly valuable. Although our current project does not include any eye-tracking, a future improvement of the UI could be achieved through collaboration with eye-tracking MotionInput teams</li></p>
+                                    <p></p><li><b>Accessibility</b>: Accessibility features are crucial for inclusivity, ensuring that individuals with varying degrees of motor abilities can use the application effectively. The main target of our project is MND patients but it would be extremely impactful if it could be utilised for other speech impairment diseases.
+                                    </li></p>
+                                    <li>
+                                        <b>Integration</b>: The software's ability to integrate with various input methods and platforms (like the internet, social media, and home control systems) showcases the importance of a flexible and extensible system.
+                                    </li>
+                                </ul> 
                         </div>
+                    
+                        
 
 
                         <h2>Technology Review</h2> 
+                        <p>After creating the MoSCow list and identifying the main aims of the project, we researched technologies that we could implement to help us achieve our goals.</p>
+                        <p>Our project's main aim is to infuse spoken audio generated from text with emotion on a reasonable time scale. This involves building on existing TTS models, as training such a model from scratch would require immense amounts of data and computing resources. There are various methods available to achieve this task, and some of them are described below.  
+                        </p>
+
+                        
+                        
+                        <ul>
+                            <p><li><b>Fine-tuning</b>: Fine-tuning is a process that makes use of a pre-trained model's more general capabilities and tunes its responses in a specific context that matches our needs. This method is useful as it requires less computational power, training data as well as time required for training. This makes the method a viable option for our project on the given time scale. 
+                            </li></p>
+                            <p><li><b>Audio Presets</b>: Existing open source TTS models often allow the use of voice presets that can make changes to voice, pitch and prosody levels in the default model output. These metrics are key to affecting emotion in speech, and thus can be leveraged by configuring voice presets for each emotion during development. 
+                            </li></p>
+                            <p><li><b>Re-training</b>:
+                                Re-training existing TTS models with modifications to the model architecture allows the incorporation of pitch and prosodic changes that weren't originally possible. For our project, this would mean introducing speaker embeddings and emotion IDs to a corpus of audio data transcribed and labelled with the corresponding emotion. However, this method requires access to significantly powerful hardware and unrealistic time scales in this context. 
+                    
+                                </li></p>
+                                <p><li><b>Prompt Conditioning</b>:
+                                    Prompt conditioning involves making use of prompts visible to the model during text processing and audio generation that allow dynamic control over natural speech patterns, like pauses. Depending on the specific model capabilities due to the data available to train it on, this can range from introducing convincing human laughter to potentially attuning the audio to a specific emotion with curated prompts.
+                                    </li></p>
+                            
+                        </ul>
+
+                        Each methodology described above comes with its own pros and cons. 
+                        <table>
+                            <tr>
+                              <th>Method</th>
+                              <th>Explanation</th>
+                            </tr>
+                            <tr>
+                              <td>Fine-tuning</td>
+                              <td>While this method significantly decreases the time required to obtain a model that achieves one's desired goal, the amount of highly specific data required to implement this method effectively remains a barrier.
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>Audio presets</td>
+                                <td>This method, although restrictive in the range of emotion available to synthesise, allows custom audio generation with a lower time period required to process text and generate input.</td>
+                              </tr>
+                              <tr>
+                                <td>Re-training</td>
+                                <td>This method allows the most control over the structure of the model and the output produced. However, not only does it require a large amount of data in order to achieve a usable standard, it also takes much more time than the other methods described. Due to the nature of our project's timeline, this method is less feasible than others.
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Prompt-conditioning</td>
+                                <td>While flexible, one potential drawback is that prompt processing generally takes up more compute power, as well as an increased amount of time between input and output. 
+                                </td>
+                              </tr>
+                          </table>
+                          
                         <h4>Programming Language</h4>
-                            <p>Python</p>
-                        <h4>Sentiment Analysis</h4>
-                            <p>There are many open-sourced sentiment analysis models available on Hugging Face</p>
+                            <p>For machine learning, <b>Python</b> is one of the best programming languages to use due to its rich ecosystem of advanced libraries and frameworks such as TensorFlow, PyTorch and scikit-learn. These provide comprehensive tools for building and deploying ML models efficiently. Additionally, due to its ML capacities, many sentiment analysis and emotional audio generation models are in Python.
+                            </p>
+                            <p>While Python itself may not be as fast as lower-level languages like C or C++, its performance can be enhanced through the use of optimised libraries and techniques. Additionally, Python interfaces seamlessly with high-performance computing libraries and frameworks, enabling scalable machine learning solutions.
+                                </p>                      
                         <h4>GUI and frontend</h4>
-                            <p>Streamlit</p>
-                        <h4>Backend</h4>
-                            <p>VALL-E(X)</p>
-                        <h4>Language Models</h4>
-                            <p>
-                                <ul>
-                                    <li>VADER</li>
-                                    <li>BERT</li>
-                                </ul></p>             
+                        <p>We will create an intuitive user interface that allows the users to easily select the text and emotions. Due to deciding to use Python for machine learning purposes, it is appropriate to use Python for the GUI as well.</p>
+                            <p>For our GUI, we considered many different toolkits that can suit our requirement of creating a simple and easy-to-use GUI for MND patients to generate emotional audio. Some common Python libraries are <b>PyQt</b> and <b>Tkinter</b>. Despite both having lots of benefits such as Tkinter being easy to use and able to run on any platform that supports Python, and PyQt being highly customisable, we decided to use <b>Streamlit</b>. 
+                            </p>
+                            <p>The main reason is that Streamlit provides an easy way to handle user input and interactivity without the need for a complex event-handling system, which is vital to reducing the complexity of our system’s text input and audio playback functionality. Additionally, it has seamless integration with Python data science libraries, which would be useful for further developments</p>
+                        <table>
+                            <tr>
+                              <th>GUI</th>
+                              <th>Advantages</th>
+                            </tr>
+                            <tr>
+                              <td>Tkinter</td>
+                              <td>Easy to use and runs on any platform that has Python installed since it is included with Python by default (no need for additional libraries or dependencies).
+
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>PyQt</td>
+                                <td> Rich GUI features and has board cross-platform compatibility between different OS
+                                    .</td>
+                              </tr>
+                              <tr>
+                                <td>Streamlit</td>
+                                <td>Applications can be easily deployed and shared online, allowing for easy accessibility. Streamlit applications are also highly customisable and can be integrated with Python data science libraries.</td>
+                              </tr>
+                              
+                          </table>
+
+                          <table>
+                            <tr>
+                              <th>GUI</th>
+                              <th>Disadvantages</th>
+                            </tr>
+                            <tr>
+                              <td>Tkinter</td>
+                              <td>Dull and outdated appearance compared to more modern GUIs. Furthermore, it has limited customisations of widgets without extensive coding.
+
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>PyQt</td>
+                                <td>  It has a complex API. Additionally, PyQt applications can be quite large after packaging for deployment because they inlcude the Qt libraries.
+
+                                    </td>
+                              </tr>
+                              <tr>
+                                <td>Streamlit</td>
+                                <td>Web only since it is designed for deploying web applications. 
+                                    </td>
+                              </tr>
+                              
+                          </table>
+                            <h4>Sentiment Analysis</h4>  
+                            <p>There are many open-sourced sentiment analysis models available online. We have researched and utilised different sentiment analysis models that enable us to very accurately analyse the emotion of text. We have listed them below, combined with their advantages and disadvantages</p>
+                            <p><b>BERT</b></p>
+                            <ul>
+                                <p><li>
+                                    <span style="color: green;">Bidirectional Context</span>: BERT's bidirectional architecture allows it to capture contextual information from both left and right contexts, enabling a deeper understanding of language semantics and syntax.
+                                    </li></p>
+                                <p><li><span style="color: green;">Transfer Learning</span>: BERT's pre-trained representations can be fine-tuned on specific downstream tasks with relatively small amounts of task-specific data, making it highly adaptable and versatile.</li></p>
+                                
+                                <li><span style="color: red;">Limited Emotions</span>: Does not include disgust and neutral emotion. Also it is not very accurate for the surprise emotion through many experimentations.
+                                </li>
+                            </ul>
+                            <p><b>VADER</b></p>
+                            <ul>
+                                <p><li>
+                                    <span style="color: green;">Pre-Trained for Sentiment Analysis</span>: VADER is specifically designed for sentiment analysis, making it easy to implement for tasks such as sentiment classification and polarity detection.                                    
+                                    </li></p>
+                                <p><li><span style="color: green;">Fast and Lightweight</span>: VADER is relatively lightweight and executes quickly, making it suitable for real-time sentiment analysis applications.                                </li></p>
+                                <p><li><span style="color: green;">Rule-Based</span>: VADER uses a lexicon and rule-based approach, which can be advantageous for certain types of sentiment analysis tasks, especially when dealing with social media or informal text.
+                                </li></p>
+                                <li><span style="color: red;">Limited Context Understanding</span>: VADER's rule-based approach may struggle with understanding complex language nuances and sarcasm, leading to less accurate sentiment predictions in some cases.
+
+                                </li>
+                            </ul>
+                            <p><b>DistilRoBERTa [5,6]</b></p>
+                            <ul>
+                                <p><li>
+                                    <span style="color: green;">High Performance</span>:DistilRoBERTa is based on the RoBERTa architecture, which is known for its strong performance across various natural language processing (NLP) tasks, including sentiment analysis, text classification, and more.
+                                    </li></p>
+                                <p><li><span style="color: green;">Efficient</span>: DistilRoBERTa is a distilled version of RoBERTa, meaning it retains much of the original model's performance while being more resource-efficient in terms of memory and computation.
+                                </li></p>
+                                
+                                <li><span style="color: red;">Resource Intensive</span>: While more efficient than the full-sized RoBERTa model, DistilRoBERTa still requires significant computational resources, especially during fine-tuning or inference on large datasets.
+                                    Also it is not very accurate for the surprise emotion through many experimentations.
+                                </li>
+                            </ul>
+                            <p>Each sentiment analysis model has its own advantages and disadvantages. Hence, we will implement an algorithm that will analyse the results from each model and conclude on a single emotion, considering all edge cases and scores.
+                            </p>
+                            
+                        <h4>Emotional Audio Generation</h4>
+                            <p><u>Possible Technology: Emotivoice</u></p>
+                            <p>The TTS model EmotiVoice is a model that offers the capabilities required for our main goals. As a prompt-controlled TTS engine, it allows a degree of flexibility in the audio produced by the model, such as emphasis of tone or subtle pauses.
+                            </p>
+                            <p>Crucially, it takes one of six emotions (Calm, Happy, Angry, Fearful, Surprised, Disgusted) along with the phonemes that correspond to the text input in order to render the audio as required. The model architecture is based on the PromptTTS research paper by Microsoft, which describes the ability to make use of embedded prompts in the input text to influence prosody in a more dynamic way.</p>
+                            <p>For our project, not only can we make use of the EmotiVoice TTS engine, we can also take inspiration from its basis rooted in prompt-controlled audio generation in order to produce convincing emotional audio.
+                            </p>
+                            <p><u>Our Technology: VALL-E-X</u></p>
+                                  
                         
                         <h2>Comparison between different libraries</h2>
                         <h2>Summary of Our Technical Decisions</h2>
@@ -152,7 +310,7 @@
                             </tr>
                             <tr>
                               <td>Sentiment Analysis</td>
-                              <td>BERT and VADER models</td>
+                              <td>BERT, VADER and DistilRoBERTa models</td>
                             </tr>
                             <!-- ... Add the other rows similarly -->
                             <tr>
@@ -160,87 +318,73 @@
                               <td>Streamlit</td>
                             </tr>
                             <tr>
-                              <td>APIs</td>
-                              <td></td>
+                              <td>Emotional Audio Generation</td>
+                              <td>Vall-E-X</td>
                             </tr>
                           </table>
 
-                        <h2>References</h2>
-
+                          <h2>References</h2>
+                          <ol>
+                              <li>
+                                  TD Talk. [Online]. Available: <a href="https://uk.tobiidynavox.com/products/td-talk?tab=1">https://uk.tobiidynavox.com/products/td-talk?tab=1</a>
+                              </li>
+                              <li>
+                                  Communicator 5. [Online]. Available: <a href="https://uk.tobiidynavox.com/pages/communicator-5">https://uk.tobiidynavox.com/pages/communicator-5</a>
+                              </li>
+                              <li>
+                                  Savani, B. (2022). DistilBERT. [Online]. Available: <a href="https://huggingface.co/bhadresh-savani/distilbert-base-uncased-emotion">https://huggingface.co/bhadresh-savani/distilbert-base-uncased-emotion</a>
+                              </li>
+                              <li>
+                                  NLPTown. (2022). BERT. [Online]. Available: <a href="https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment">https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment</a>
+                              </li>
+                              <li>
+                                  Hartmann, J. (2024). DistilRoBERTa. [Online]. Available: <a href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base">https://huggingface.co/j-hartmann/emotion-english-distilroberta-base</a>
+                              </li>
+                              <li>
+                                Jieli, M. (2022). DistilRoBERTa. [Online]. Available <a href="https://huggingface.co/michellejieli/emotion_text_classifier">https://huggingface.co/michellejieli/emotion_text_classifier</a>
+                              </li>
+                              <li>
+                                  netease-youdao. (2022). EmotiVoice. [Online]. Available: <a href="https://github.com/netease-youdao/EmotiVoice">https://github.com/netease-youdao/EmotiVoice</a>
+                              </li>
+                              <li>
+                                  Plachtaa. (2020). VALL-E-X. [Online]. Available: <a href="https://github.com/Plachtaa/VALL-E-X">https://github.com/Plachtaa/VALL-E-X</a>
+                              </li>
+                          </ol>
+                          
                     </div> <!-- end grid-block-->
                 </div> <!-- end pagemain -->
 
            </section> <!-- pagecontent -->
 
-                <!-- # footer 
+                 <!-- # footer 
         ================================================== -->
         <footer class="s-footer">
             <div class="row s-footer__content">
                 <div class="column xl-6 lg-6 md-12 s-footer__block s-footer__about">                    
-                    <h3>About Monica</h3>
+                    <h3>About EMENDi2</h3>
                     <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas illum quasi facere libero, 
-                    fugiat laboriosam possimus reprehenderit eveniet vero voluptatum fugit ad quis veritatis suscipit beatae 
-                    incidunt perferendis tempore earum hic repellendus quisquam recusandae ipsa id esse. Nobis, aut deleniti.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere ratione dignissimos.
+                    EMENDi2 aims to significantly improve the communication processfor MND patients by introducing an emotional voice synthesiser. 
                     </p>               
                 </div>                
                 <div class="column xl-3 lg-6 md-12 s-footer__block s-footer__site-links">
-                    <ul class="link-list">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="requirements.html">Requirements</a></li>
-                        <li><a href="ui_design.html">UI Design</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                    
                 </div>
-                <div class="column xl-3 lg-6 md-12 tab-12 s-footer__block s-footer__newsletter">
-                    <h3>Newsletter</h3>
-
-                    <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere ratione dignissimos.
-                    </p>
-
-                    <div class="subscribe-form">
-                        <form id="mc-form" class="mc-form">
-                            <input type="email" name="EMAIL" id="mce-EMAIL" class="u-fullwidth text-center" placeholder="Your Email Address" title="The domain portion of the email address is invalid (the portion after the @)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" required>
-                            <input type="submit" name="subscribe" value="Subscribe" class="btn btn--primary btn--small u-fullwidth">
-                            <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cdb7b577e41181934ed6a6a44_9a91cfe7b3" tabindex="-1" value=""></div> -->
-                            <div class="mc-status"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>     
+                
             
             <div class="row s-footer__bottom">
                 <div class="column xl-6 lg-12">
-                    <ul class="s-footer__social social-list">
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592 c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20 c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z"></path></svg>
-                                <span class="u-screen-reader-text">Facebook</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M19.633,7.997c0.013,0.175,0.013,0.349,0.013,0.523c0,5.325-4.053,11.461-11.46,11.461c-2.282,0-4.402-0.661-6.186-1.809 c0.324,0.037,0.636,0.05,0.973,0.05c1.883,0,3.616-0.636,5.001-1.721c-1.771-0.037-3.255-1.197-3.767-2.793 c0.249,0.037,0.499,0.062,0.761,0.062c0.361,0,0.724-0.05,1.061-0.137c-1.847-0.374-3.23-1.995-3.23-3.953v-0.05 c0.537,0.299,1.16,0.486,1.82,0.511C3.534,9.419,2.823,8.184,2.823,6.787c0-0.748,0.199-1.434,0.548-2.032 c1.983,2.443,4.964,4.04,8.306,4.215c-0.062-0.3-0.1-0.611-0.1-0.923c0-2.22,1.796-4.028,4.028-4.028 c1.16,0,2.207,0.486,2.943,1.272c0.91-0.175,1.782-0.512,2.556-0.973c-0.299,0.935-0.936,1.721-1.771,2.22 c0.811-0.088,1.597-0.312,2.319-0.624C21.104,6.712,20.419,7.423,19.633,7.997z"></path></svg>
-                                <span class="u-screen-reader-text">Twitter</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M11.999,7.377c-2.554,0-4.623,2.07-4.623,4.623c0,2.554,2.069,4.624,4.623,4.624c2.552,0,4.623-2.07,4.623-4.624 C16.622,9.447,14.551,7.377,11.999,7.377L11.999,7.377z M11.999,15.004c-1.659,0-3.004-1.345-3.004-3.003 c0-1.659,1.345-3.003,3.004-3.003s3.002,1.344,3.002,3.003C15.001,13.659,13.658,15.004,11.999,15.004L11.999,15.004z"></path><circle cx="16.806" cy="7.207" r="1.078"></circle><path d="M20.533,6.111c-0.469-1.209-1.424-2.165-2.633-2.632c-0.699-0.263-1.438-0.404-2.186-0.42 c-0.963-0.042-1.268-0.054-3.71-0.054s-2.755,0-3.71,0.054C7.548,3.074,6.809,3.215,6.11,3.479C4.9,3.946,3.945,4.902,3.477,6.111 c-0.263,0.7-0.404,1.438-0.419,2.186c-0.043,0.962-0.056,1.267-0.056,3.71c0,2.442,0,2.753,0.056,3.71 c0.015,0.748,0.156,1.486,0.419,2.187c0.469,1.208,1.424,2.164,2.634,2.632c0.696,0.272,1.435,0.426,2.185,0.45 c0.963,0.042,1.268,0.055,3.71,0.055s2.755,0,3.71-0.055c0.747-0.015,1.486-0.157,2.186-0.419c1.209-0.469,2.164-1.424,2.633-2.633 c0.263-0.7,0.404-1.438,0.419-2.186c0.043-0.962,0.056-1.267,0.056-3.71s0-2.753-0.056-3.71C20.941,7.57,20.801,6.819,20.533,6.111z M19.315,15.643c-0.007,0.576-0.111,1.147-0.311,1.688c-0.305,0.787-0.926,1.409-1.712,1.711c-0.535,0.199-1.099,0.303-1.67,0.311 c-0.95,0.044-1.218,0.055-3.654,0.055c-2.438,0-2.687,0-3.655-0.055c-0.569-0.007-1.135-0.112-1.669-0.311 c-0.789-0.301-1.414-0.923-1.719-1.711c-0.196-0.534-0.302-1.099-0.311-1.669c-0.043-0.95-0.053-1.218-0.053-3.654 c0-2.437,0-2.686,0.053-3.655c0.007-0.576,0.111-1.146,0.311-1.687c0.305-0.789,0.93-1.41,1.719-1.712 c0.534-0.198,1.1-0.303,1.669-0.311c0.951-0.043,1.218-0.055,3.655-0.055c2.437,0,2.687,0,3.654,0.055 c0.571,0.007,1.135,0.112,1.67,0.311c0.786,0.303,1.407,0.925,1.712,1.712c0.196,0.534,0.302,1.099,0.311,1.669 c0.043,0.951,0.054,1.218,0.054,3.655c0,2.436,0,2.698-0.043,3.654H19.315z"></path></svg>
-                                <span class="u-screen-reader-text">Instagram</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M20.66 6.98a9.932 9.932 0 0 0-3.641-3.64C15.486 2.447 13.813 2 12 2s-3.486.447-5.02 1.34c-1.533.893-2.747 2.107-3.64 3.64S2 10.187 2 12s.446 3.487 1.34 5.02a9.924 9.924 0 0 0 3.641 3.64C8.514 21.553 10.187 22 12 22s3.486-.447 5.02-1.34a9.932 9.932 0 0 0 3.641-3.64C21.554 15.487 22 13.813 22 12s-.446-3.487-1.34-5.02zM12 3.66c2 0 3.772.64 5.32 1.919-.92 1.174-2.286 2.14-4.1 2.9-1.002-1.813-2.088-3.327-3.261-4.54A7.715 7.715 0 0 1 12 3.66zM5.51 6.8a8.116 8.116 0 0 1 2.711-2.22c1.212 1.201 2.325 2.7 3.34 4.5-2 .6-4.114.9-6.341.9-.573 0-1.006-.013-1.3-.04A8.549 8.549 0 0 1 5.51 6.8zM3.66 12c0-.054.003-.12.01-.2.007-.08.01-.146.01-.2.254.014.641.02 1.161.02 2.666 0 5.146-.367 7.439-1.1.187.373.381.793.58 1.26-1.32.293-2.674 1.006-4.061 2.14S6.4 16.247 5.76 17.5c-1.4-1.587-2.1-3.42-2.1-5.5zM12 20.34c-1.894 0-3.594-.587-5.101-1.759.601-1.187 1.524-2.322 2.771-3.401 1.246-1.08 2.483-1.753 3.71-2.02a29.441 29.441 0 0 1 1.56 6.62 8.166 8.166 0 0 1-2.94.56zm7.08-3.96a8.351 8.351 0 0 1-2.58 2.621c-.24-2.08-.7-4.107-1.379-6.081.932-.066 1.765-.1 2.5-.1.799 0 1.686.034 2.659.1a8.098 8.098 0 0 1-1.2 3.46zm-1.24-5c-1.16 0-2.233.047-3.22.14a27.053 27.053 0 0 0-.68-1.62c2.066-.906 3.532-2.006 4.399-3.3 1.2 1.414 1.854 3.027 1.96 4.84-.812-.04-1.632-.06-2.459-.06z"></path></svg>
-                                <span class="u-screen-reader-text">Dribbble</span>
-                            </a>
-                        </li>
-                    </ul> <!-- end s-footer__social -->
+                    <ul class="link-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="requirements.html">Requirements</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="algorithms.html">Algorithms</a></li>
+                        <li><a href="ui_design.html">UI Design</a></li>
+                        <li><a href="system_design.html">System Design</a></li>
+                        <li><a href="implementation.html">Implementation</a></li>
+                        <li><a href="testing.html">Testing</a></li>
+                        <li><a href="evaluation.html">Evaluation</a></li>
+                        <li><a href="appendices.html">Appendices</a></li>
+                    </ul>
                 </div>
                 <div class="column xl-6 lg-12">
                     <p class="ss-copyright">
@@ -257,6 +401,9 @@
             </div>
             
         </footer> <!-- end s-footer -->
+
+    </div> <!-- end page-wrap -->
+
 
     </div> <!-- end page-wrap -->
     <!-- Java Script
