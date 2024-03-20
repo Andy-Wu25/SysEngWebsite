@@ -66,9 +66,9 @@
                 <nav class="s-header__nav">
     
                     <ul class="s-header__menu-links">
-                        <li class="current"><a href="index.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="requirements.html">Requirements</a></li>
-                        <li><a href="research.html">Research</a></li>
+                        <li class="current"><a href="research.html">Research</a></li>
                         <li><a href="algorithms.html">Algorithms</a></li>
                         <li><a href="ui_design.html">UI Design</a></li>
                         <li><a href="system_design.html">System Design</a></li>
@@ -250,7 +250,7 @@
                           </table>
                             <h4>Sentiment Analysis</h4>  
                             <p>There are many open-sourced sentiment analysis models available online. We have researched and utilised different sentiment analysis models that enable us to very accurately analyse the emotion of text. We have listed them below, combined with their advantages and disadvantages</p>
-                            <p><b>BERT</b></p>
+                            <p><b>BERT and DistilBERT [3,4]</b></p>
                             <ul>
                                 <p><li>
                                     <span style="color: green;">Bidirectional Context</span>: BERT's bidirectional architecture allows it to capture contextual information from both left and right contexts, enabling a deeper understanding of language semantics and syntax.
@@ -288,13 +288,13 @@
                             </p>
                             
                         <h4>Emotional Audio Generation</h4>
-                            <p><u>Possible Technology: Emotivoice</u></p>
+                            <p><u>Possible Technology: Emotivoice [7]</u></p>
                             <p>The TTS model EmotiVoice is a model that offers the capabilities required for our main goals. As a prompt-controlled TTS engine, it allows a degree of flexibility in the audio produced by the model, such as emphasis of tone or subtle pauses.
                             </p>
                             <p>Crucially, it takes one of six emotions (Calm, Happy, Angry, Fearful, Surprised, Disgusted) along with the phonemes that correspond to the text input in order to render the audio as required. The model architecture is based on the PromptTTS research paper by Microsoft, which describes the ability to make use of embedded prompts in the input text to influence prosody in a more dynamic way.</p>
                             <p>For our project, not only can we make use of the EmotiVoice TTS engine, we can also take inspiration from its basis rooted in prompt-controlled audio generation in order to produce convincing emotional audio.
                             </p>
-                            <p><u>Our Technology: VALL-E-X</u></p>
+                            <p><u>Our Technology: VALL-E-X [8]</u></p>
                                   
                         
                         <h2>Comparison between different libraries</h2>
