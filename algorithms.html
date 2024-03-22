@@ -122,10 +122,28 @@
                     <div class="column xl-12"> 
 
                         <h2>Models</h2>
+                        <h5>Text-to-Speech</h5>
+                        <p>For our main text-to-speech functionality, we decided to work on a base pre-trained model and enable it to incorporate tonal shifts to better replicate emotions. To achieve this, we initially tried to implement a version of EmotiVoice. This model works on the theory of prompt conditioning. </p>
+                        <p>However, we later found Microsoft’s VallE-X, an open source model with clear architecture that allowed the use of presets to change the voice used in the audio. We decided to use this as our main model, as we realised the potential for this model’s capabilities to be used for on-the-go personalisation of audio. Furthermore, this model requires less data for tuning it to our needs, a feature that further compelled us to experiment with this for our main component with 7 emotions.
+                        </p>
+                        <h5>Sentiment Analyser</h5>
+                        <p>For our sentiment analyser, our research revealed three possible models we could make use of: DistilROBERTA, DistilBERT and VADER. DistilROBERTA displays higher accuracy in sentiment analysis, but we also made use of DistilBERT in combination with this model due to its efficiency. </p>
                         <h2>Data</h2>
+                        <h2>Models</h2>
+                        <h5>Text-to-Speech</h5>
                         <h2>Experiments</h2>
                         <h2>Discussions</h2>
                         <h2>Conclusion</h2>
+                        <h2>References</h2>
+                        <ol>
+                            <li>J. Hartmann, "Emotion-English-DistilRoberta-Base," Hugging Face, 2023. [Online]. Available: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base. [Accessed: 22-Mar-2024].
+                            </li>
+                            <li>M. Jieli, "Emotion Text Classifier," Hugging Face, 2023. [Online]. Available: https://huggingface.co/michellejieli/emotion_text_classifier. [Accessed: 22-Mar-2024].</li>
+                            <li>B. Savani, "Distilbert-Base-Uncased-Emotion," Hugging Face, 2023. [Online]. Available: https://huggingface.co/bhadresh-savani/distilbert-base-uncased-emotion. [Accessed: 22-Mar-2024].</li>
+                            <li>Plachtaa, "VALL-E-X," GitHub, 2023. [Online]. Available: https://github.com/Plachtaa/VALL-E-X. [Accessed: 22-Mar-2024].</li>
+                            <li>dair-ai, "Emotion," Hugging Face Datasets, 2023. [Online]. Available: https://huggingface.co/datasets/dair-ai/emotion. [Accessed: 22-Mar-2024].</li>
+                            <li>"Daily Dialog," Hugging Face Datasets, 2023. [Online]. Available: https://huggingface.co/datasets/daily_dialog?row=61. [Accessed: 22-Mar-2024].</li>
+                        </ol>
                             
 
                         
