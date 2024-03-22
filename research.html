@@ -296,6 +296,10 @@
                             <p>For our project, not only can we make use of the EmotiVoice TTS engine, we can also take inspiration from its basis rooted in prompt-controlled audio generation in order to produce convincing emotional audio.
                             </p>
                             <p><u>Our Technology: VALL-E-X [8]</u></p>
+                            <p>EmotiVoice is a discriminative model. This means it relies on previously known knowledge of how each phoneme sounds to generate audio from text. However, to train this kind of model would require a large amount of data, time and computational power. </p>
+                            <p>Microsoft Vall-E-X, on the other hand, is a generative TTS model. It employs a novel language model method that utilises discrete codes from an off-the-shelf neural audio codec model as intermediate representations to replicate anyone's voice after listening to just three seconds of audio recording. This is a feature that allows us to see results with minimal data input.</p>
+                            <p>VALL-E-X has the capability to preserve the speaker's emotion and acoustic environment during synthesis, crucial to implementing an emotional TTS system. It also allows zero-shot cross-lingual synthesis, which opens up potential for the user to customise their own presets in multiple languages while maintaining their unique voice and emotional expression. </p>
+                            <p>We can make use of these capabilities to implement our system much faster and with much less data, a shift away from traditional machine learning methods that rely on training models on a large corpus of data.</p>
                                   
                         
                         <h2>Summary of Our Technical Decisions</h2>
