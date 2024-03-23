@@ -375,18 +375,35 @@
 
                         <h2 class="u-add-bottom">Critical Evaluation</h2>
                         <h5> User Interface/User Experience</h5>
+                        <p>We recongised that a responsive and easy-to-use user interface is extremely important for efficient communication of MND patients</p>
+                        <p>As a result, the UI is extremely simple and intuitive. All of the buttons are labelled and different functionalities are split into different columns. Additionally, the user interactions are very responsive. Once the user presses on the smart generate button or the manual generate button, it will display a scrolling wheel animation with text notifying the user that the audio generation is in progress.
+                        </p>
+                        <p>After the audio has been generated, the UI will be immediately updated with the correct audio file to play.
+                        </p>
+
                         <h5>Functionality</h5>
+                        <p>Our application covers 100% of the functional requirements of the MoSCoW list. Within our demonstration videos, we have demonstrated all functionalities to ensure that they are working perfectly as intended.</p>
+                        
+                       
 
                         <h5>Stability</h5>
+                        <p>Our team followed rigorous testing procedures throughout our development cycle. To ensure the correctness of all functionalities, we implemented unit tests using the <code>unittest</code> framework. Furthermore, we implemented custom error handling to maintain the accuracy and reliability of important functions such as correct text and emotion being stored.
+                        </p>
 
                         <h5>Efficiency</h5>
+                        <p>The speed of audio generation has been a key concern throughout the project cycle. To ensure efficient communications for MND patients, we need to make the audio generation process as fast as possible while maintaining a high quality of emotional intonations. This was a difficult task since it is usually a tradeoff between speed and quality of audio. Throughout our research and testing, while our audio generation model (Vall-E-X) performed worse than other models such as EmotiVoice, its quality was much better, as evidenced by the user acceptance testing. Additionally, by using more powerful hardwares such as GPUs, we can significantly improve the speed of audio generation for our application.
+                        </p>
 
                         <h5>Compatibility</h5>
+                        <p>The application can be deployed for Windows and Linux. Although it is a web application, its current capabilities can only run on the local machine. However, if we deploy it to a cloud service such as Streamlit Cloud, our application can be used on different machines and operating systems whithout needing to set up a coding environment and installing dependencies.</p>
 
                         <h5>Maintainability</h5>
+                        <p>The code base is well-documented and we have used the Model-View-Controller design pattern, which enhances application maintainability. This is because the separating of data, logic and presentation layers make code reusable and easier to modify without affecting other components.
+                        </p>
 
                         <h5>Project Management</h5>
-
+                        <p>We approached the project with an agile methodology, building new prototypes over time. For our project management strategy, we implemented weekly meetings outside of our lab sessions, and pair programming sessions. We found pair programming sessions to be extremely effective, as it promotes collaboration and reduces many errors while improving code quality.</p>
+                        <p>We also utilised the version control system Git to keep track of our code progression and enable all team members to work on the application together. For instance, while Andy was working on the Streamlit frontend,  Maestro was writing Python scripts to generate emotional audio.</p>
                         
 
                         <h2>Future Work</h2>
