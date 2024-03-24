@@ -187,7 +187,7 @@
                         <h2>Hash Function to check for existing audio files</h2>
                         <p>This function utilises the input text and concluded/selected emotion combined as the input of hash function to generate an unique id. The unique id will then be used as the audio file name when generating the emotional audio. This is because if the user has the same repeated text of the same emotion, we can save computational resources by checking if the audio file has already been generated previously. If it has, it can reuse it again to be more computational efficient
                         </p>
-                        <p>Since our system aims to help MND patients communicate efficiently, we should make conversational phrases be generated as quickly as possible. Even though the time of generation depends on the length of the text, we can include some pre-generated emotional audio that is extremely common in daily communications in the software package. Hence, when the user uses the phrases, hash function will generate an unique id that is identical to an already-downloaded audio file. This allows the user to communicate very efficiently without generating the phrases again.
+                        <p>Since our system aims to help MND patients communicate efficiently, we should make conversational phrases be generated as quickly as possible. Even though the time of generation depends on the length of the text, we can include some pre-generated emotional audio that is extremely common in daily communications in the software package. Hence, when the user uses the phrases, hash function will generate an unique id that is identical to an already-downloaded audio file. This allows the user to communicate very efficiently without regenerating the phrases.
                         </p>
                         <p><b>SHA-256</b> is specifically designed to minimise the likelihood of collisions by generating a unique hash value for each input with a high degree of probability. However, in practical terms, hash collisions can still occur due to factors such as the birthday paradox, where the probability of a collision increases as more hash values are generated.
                         </p>
@@ -211,7 +211,7 @@
                 <div class="column xl-6 lg-6 md-12 s-footer__block s-footer__about">                    
                     <h3>About EMENDi2</h3>
                     <p>
-                    EMENDi2 aims to significantly improve the communication processfor MND patients by introducing an emotional voice synthesiser. 
+                    EMENDi2 aims to significantly improve the communication process for MND patients by introducing an emotional voice synthesiser. 
                     </p>               
                 </div>                
                 <div class="column xl-3 lg-6 md-12 s-footer__block s-footer__site-links">
