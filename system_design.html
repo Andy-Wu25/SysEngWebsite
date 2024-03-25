@@ -149,7 +149,7 @@
                             </li></p>
                             <p><li><code>FileManager</code> class: Manages data persistence, specifically responsible for writing the analysed sentiment data to <code>results.json</code>, ensuring a structured and persistent data format.
                             </li></p>
-                            <p><li><code>Utility</code> class: Provides auxiliary functions including <code>generate_unique_id</code> and <code>check_audio_file_exists</code>, which aid in maintaining the integrity and uniqueness of the data processed.</li></p>
+                            <p><li><code>Utility</code> class: Provides auxiliary functions including <code>generate_unique_id</code> and <code>check_audio_file_exists</code>, which aid in reusing previously generated audio files.</li></p>
                             <p> <li>Vall-E-X model generates the emotional audio based on the text and prompt given.
                             </li></p>
                            
@@ -165,7 +165,7 @@
                             </li></p>
                             <p><li>The dynamic display of messages and the audio player that uses st.audio() to play the generated audio files.
                             </li></p>
-                            <p><li>When the text input is empty but the user has pressed one of the generation buttons, it will update the View directly, displaying an error message. This is because we cannot generate audio without any text
+                            <p><li>When the text input is empty but the user has pressed one of the generation buttons, it will update the View directly, displaying an error message. This is because we cannot generate audio without any text.
                             </li></p>
                         </ul>
                        
@@ -179,7 +179,7 @@
                             <p><li><code>voice_generator.py</code>: Python script that handles the final step of audio generation based on the Model's data.</li></p>
                         </ul>
 
-                        <p>By implementing the MVC pattern, our application ensures a clear delineation between the user interface, data processing, and control logic. This separation facilitates ease of development, testing, and future enhancements, and it has been pivotal in maintaining a clean and modular architecture throughout our application's lifecycle.
+                        <p>By implementing the MVC pattern, our application ensures a clear distiction between the user interface, data processing, and control logic. This separation facilitates ease of development, testing, and future enhancements, and it has been pivotal in maintaining a clean and modular architecture throughout our application's lifecycle.
 
                         </p>
 
